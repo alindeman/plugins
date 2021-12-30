@@ -161,8 +161,7 @@ func SetupVethWithName(contVethName, hostVethName string, mtu int, contVethMac s
 			return fmt.Errorf("failed to set %q up: %v", hostVethName, err)
 		}
 
-		// we want to own the routes for this interface
-		_, _ = sysctl.Sysctl(fmt.Sprintf("net/ipv6/conf/%s/accept_ra", hostVethName), "0")
+		_, _ = sysctl.Sysctl(fmt.Sprintf("net/ipv6/conf/%s/accept_ra", hostVethName), "1")
 		return nil
 	})
 	if err != nil {

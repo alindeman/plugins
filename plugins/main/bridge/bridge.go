@@ -291,8 +291,7 @@ func ensureBridge(brName string, mtu int, promiscMode, vlanFiltering bool) (*net
 		return nil, err
 	}
 
-	// we want to own the routes for this interface
-	_, _ = sysctl.Sysctl(fmt.Sprintf("net/ipv6/conf/%s/accept_ra", brName), "0")
+	_, _ = sysctl.Sysctl(fmt.Sprintf("net/ipv6/conf/%s/accept_ra", brName), "1")
 
 	if err := netlink.LinkSetUp(br); err != nil {
 		return nil, err
